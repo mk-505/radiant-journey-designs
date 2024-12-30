@@ -23,16 +23,18 @@ export function Contact() {
     setIsSubmitting(true);
 
     try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: 'After Dark Creative',
+        reply_to: formData.email,
+      };
+
       await emailjs.send(
         'service_y22zw4i',
         'template_nnbsn56',
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_name: 'After Dark Creative', // Added recipient name
-          reply_to: formData.email, // Added reply_to field
-        }
+        templateParams
       );
 
       toast({
