@@ -6,8 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import emailjs from '@emailjs/browser';
 
-// Initialize EmailJS with your public key
-emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual public key
+// Initialize EmailJS with environment variable
+emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
 export function Contact() {
   const { toast } = useToast();
@@ -24,8 +24,8 @@ export function Contact() {
 
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           from_name: formData.name,
           from_email: formData.email,
@@ -40,12 +40,12 @@ export function Contact() {
       });
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
+      console.error('Error sending email:', error);
       toast({
         title: "Error sending message",
         description: "Please try again later or contact us directly.",
         variant: "destructive",
       });
-      console.error('Error sending email:', error);
     } finally {
       setIsSubmitting(false);
     }
