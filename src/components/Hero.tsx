@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Globe } from "@/components/Globe";
 
 export function Hero() {
   return (
@@ -21,6 +22,7 @@ export function Hero() {
             Start Your Project
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
+          <Globe />
         </div>
       </div>
     </section>
