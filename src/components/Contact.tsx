@@ -33,7 +33,7 @@ export function Contact() {
 
       await emailjs.send(
         'service_y22zw4i',
-        'template_nnbsn56',
+        'template_6fkbmtb',
         templateParams
       );
 
