@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import emailjs from '@emailjs/browser';
 
 export function Contact() {
   const { toast } = useToast();
@@ -12,14 +13,40 @@ export function Contact() {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(
+        'service_xxxxxxx', // You'll need to replace this with your EmailJS service ID
+        'template_xxxxxxx', // You'll need to replace this with your EmailJS template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: 'afterdark.creativ@gmail.com',
+        },
+        'your_public_key' // You'll need to replace this with your EmailJS public key
+      );
+
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you as soon as possible.",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: "Please try again later or contact us directly.",
+        variant: "destructive",
+      });
+      console.error('Error sending email:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,8 +109,8 @@ export function Contact() {
                 className="min-h-[150px]"
               />
             </div>
-            <Button type="submit" className="w-full">
-              Send Message
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
         </div>
