@@ -6,6 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import emailjs from '@emailjs/browser';
 
+// Initialize EmailJS with your public key
+emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual public key
+
 export function Contact() {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -21,15 +24,14 @@ export function Contact() {
 
     try {
       await emailjs.send(
-        'service_xxxxxxx', // You'll need to replace this with your EmailJS service ID
-        'template_xxxxxxx', // You'll need to replace this with your EmailJS template ID
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
           to_email: 'afterdark.creativ@gmail.com',
-        },
-        'your_public_key' // You'll need to replace this with your EmailJS public key
+        }
       );
 
       toast({
