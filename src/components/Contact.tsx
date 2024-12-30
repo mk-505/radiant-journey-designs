@@ -30,7 +30,8 @@ export function Contact() {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
-          to_email: 'afterdark.creativ@gmail.com',
+          to_name: 'After Dark Creative', // Added recipient name
+          reply_to: formData.email, // Added reply_to field
         }
       );
 
