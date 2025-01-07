@@ -16,9 +16,9 @@ export function Globe() {
     containerRef.current.appendChild(renderer.domElement);
 
     // Create base sphere (ocean)
-    const geometry = new THREE.SphereGeometry(1, 64, 64);
+    const geometry = new THREE.SphereGeometry(1, 128, 128);
     const material = new THREE.MeshPhongMaterial({
-      color: new THREE.Color('#4338ca'), // Deep blue
+      color: new THREE.Color('#4338ca'),
       shininess: 25,
       opacity: 0.9,
       transparent: true,
@@ -29,7 +29,7 @@ export function Globe() {
     // Create atmosphere glow
     const atmosphereGeometry = new THREE.SphereGeometry(1.1, 64, 64);
     const atmosphereMaterial = new THREE.MeshPhongMaterial({
-      color: new THREE.Color('#a78bfa'), // Purple
+      color: new THREE.Color('#a78bfa'),
       shininess: 25,
       opacity: 0.1,
       transparent: true,
@@ -38,27 +38,54 @@ export function Globe() {
     const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
     scene.add(atmosphere);
 
-    // Create random continents
-    const continentsGeometry = new THREE.SphereGeometry(1.01, 64, 64);
-    const continentsMaterial = new THREE.MeshPhongMaterial({
-      color: new THREE.Color('#7c3aed'), // Brighter purple
+    // Create detailed landscape
+    const landscapeGeometry = new THREE.SphereGeometry(1.01, 128, 128);
+    const landscapeMaterial = new THREE.MeshPhongMaterial({
+      vertexColors: true,
       shininess: 10,
-      opacity: 0.8,
-      transparent: true,
     });
-    const continents = new THREE.Mesh(continentsGeometry, continentsMaterial);
-    
-    // Create random "continent" patches
-    for (let i = 0; i < continentsGeometry.attributes.position.count; i++) {
-      if (Math.random() > 0.85) {
-        const positions = continentsGeometry.attributes.position.array;
-        positions[i * 3] *= 1.02;
-        positions[i * 3 + 1] *= 1.02;
-        positions[i * 3 + 2] *= 1.02;
+
+    // Generate terrain and colors
+    const positions = landscapeGeometry.attributes.position.array;
+    const colors = new Float32Array(positions.length);
+    const color = new THREE.Color();
+
+    for (let i = 0; i < positions.length; i += 3) {
+      // Generate noise-based elevation
+      const noise = Math.random();
+      const elevation = noise > 0.6 ? (noise - 0.6) * 0.1 : 0;
+      
+      // Apply elevation to vertex
+      const scale = 1.0 + elevation;
+      positions[i] *= scale;
+      positions[i + 1] *= scale;
+      positions[i + 2] *= scale;
+
+      // Set color based on elevation
+      if (elevation > 0.02) {
+        // Mountain peaks
+        color.setHSL(0.75, 0.6, 0.4 + elevation * 2); // Purple mountains
+      } else if (elevation > 0.01) {
+        // Hills
+        color.setHSL(0.7, 0.5, 0.4); // Darker purple hills
+      } else if (elevation > 0) {
+        // Lowlands
+        color.setHSL(0.65, 0.4, 0.35); // Even darker purple lowlands
+      } else {
+        // Water/valleys
+        color.setHSL(0.6, 0.7, 0.3); // Deep purple valleys
       }
+
+      colors[i] = color.r;
+      colors[i + 1] = color.g;
+      colors[i + 2] = color.b;
     }
-    continentsGeometry.attributes.position.needsUpdate = true;
-    scene.add(continents);
+
+    landscapeGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    landscapeGeometry.attributes.position.needsUpdate = true;
+
+    const landscape = new THREE.Mesh(landscapeGeometry, landscapeMaterial);
+    scene.add(landscape);
 
     // Add lights
     const ambientLight = new THREE.AmbientLight(0x404040, 2);
@@ -84,7 +111,7 @@ export function Globe() {
       requestAnimationFrame(animate);
       globe.rotation.y += 0.005;
       atmosphere.rotation.y += 0.005;
-      continents.rotation.y += 0.005;
+      landscape.rotation.y += 0.005;
       renderer.render(scene, camera);
     };
 
