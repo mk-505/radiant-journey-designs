@@ -6,7 +6,7 @@ export function About() {
     {
       name: "Shaun Arulanandam",
       portfolio: "https://shaun2005.netlify.app/",
-      image: "/shauna.JPG",
+      image: "/shauna.jpg",
     },
     {
       name: "Manroop Kalsi",
