@@ -7,11 +7,13 @@ export function About() {
       name: "Shaun Arulanandam",
       portfolio: "https://shaun2005.netlify.app/",
       image: "/shauna.jpg",
+      description: "A tech enthusiast and entrepreneur passionate about leveraging AI, software development, and creativity to solve complex problems."
     },
     {
       name: "Manroop Kalsi",
       portfolio: "https://manroopkalsi.notion.site/",
       image: "/manroop.jpg",
+      description: "Driven by a passion for technology, innovation, and creating impactful solutions that inspire positive change."
     },
   ];
 
@@ -31,7 +33,7 @@ export function About() {
               />
               <h3 className="text-xl font-bold text-center mb-2">{founder.name}</h3>
               <p className="text-muted-foreground text-center mb-4">
-                A tech enthusiast and entrepreneur passionate about leveraging AI, software development, and creativity to solve complex problems.
+                {founder.description}
               </p>
               <a
                 href={founder.portfolio}
