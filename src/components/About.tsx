@@ -6,12 +6,12 @@ export function About() {
     {
       name: "Shaun Arulanandam",
       portfolio: "https://shaun2005.netlify.app/",
-      image: "/placeholder.svg",
+      image: "/shaun.JPG",
     },
     {
       name: "Manroop Kalsi",
       portfolio: "https://manroopkalsi.notion.site/",
-      image: "/placeholder.svg",
+      image: "/manroop.jpg",
     },
   ];
 
