@@ -5,7 +5,7 @@ export function About() {
   const founders = [
     {
       name: "Shaun Arulanandam",
-      portfolio: "https://friendly-flan-b8c9ec.netlify.app/",
+      portfolio: "https://shaun2005.netlify.app/",
       image: "/placeholder.svg",
     },
     {
