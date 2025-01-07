@@ -62,7 +62,7 @@ export function Contact() {
         </h2>
         <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
           <div>
-            <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
+            <h3 className="text-2xl font-bold mb-6">Contact Us for a Free Online Consultation</h3>
             <div className="space-y-6">
               <a
                 href="mailto:afterdark.creativ@gmail.com"
