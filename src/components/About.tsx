@@ -31,7 +31,7 @@ export function About() {
               />
               <h3 className="text-xl font-bold text-center mb-2">{founder.name}</h3>
               <p className="text-muted-foreground text-center mb-4">
-                Passionate about creation and making a positive impact in the world
+                A tech enthusiast and entrepreneur passionate about leveraging AI, software development, and creativity to solve complex problems.
               </p>
               <a
                 href={founder.portfolio}
