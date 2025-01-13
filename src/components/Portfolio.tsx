@@ -4,22 +4,16 @@ import { ExternalLink } from "lucide-react";
 export function Portfolio() {
   const projects = [
     {
-      title: "E-commerce Platform",
-      description: "Modern e-commerce solution with seamless checkout experience",
-      image: "/placeholder.svg",
-      link: "#",
+      title: "Bloom Website",
+      description: "Modern flower shop website with elegant design and seamless user experience",
+      image: "/flowershop.png",
+      link: "https://harmonious-tarsier-ac50b6.netlify.app/about",
     },
     {
-      title: "Restaurant Website",
-      description: "Elegant website with online reservation system",
-      image: "/placeholder.svg",
-      link: "#",
-    },
-    {
-      title: "Tech Startup",
-      description: "Dynamic landing page for a SaaS platform",
-      image: "/placeholder.svg",
-      link: "#",
+      title: "ASL Learn",
+      description: "Interactive platform for learning American Sign Language",
+      image: "/asl.png",
+      link: "https://asl-sign-sensei-avk1nlvqg-mk-505s-projects.vercel.app/",
     },
   ];
 
@@ -29,7 +23,7 @@ export function Portfolio() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">
           Our Latest Work
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {projects.map((project) => (
             <Card
               key={project.title}
