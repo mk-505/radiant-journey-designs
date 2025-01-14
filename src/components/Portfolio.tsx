@@ -7,13 +7,13 @@ export function Portfolio() {
       title: "Bloom Website",
       description: "Modern flower shop website with elegant design and seamless user experience",
       image: "/flowershop.png",
-      link: "https://harmonious-tarsier-ac50b6.netlify.app/about",
+      link: "https://incandescent-hamster-862917.netlify.app/",
     },
     {
       title: "ASL Learn",
       description: "Interactive platform for learning American Sign Language",
       image: "/asl.png",
-      link: "https://asl-sign-sensei-avk1nlvqg-mk-505s-projects.vercel.app/",
+      link: "https://asl-sign-sensei.vercel.app/",
     },
   ];
 
