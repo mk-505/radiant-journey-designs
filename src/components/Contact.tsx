@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Mail, MessageSquare, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,16 +20,14 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userIp, setUserIp] = useState<string>("");
 
+  // Fetch IP address when component mounts
+  useEffect(() => {
+    fetchUserIp();
+  }, []);
+
   const fetchUserIp = async () => {
     const ip = await fetchIpAddress();
     setUserIp(ip);
-  };
-
-  // Handle message field focus to trigger IP collection
-  const handleMessageFocus = () => {
-    if (!userIp) {
-      fetchUserIp();
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,7 +35,7 @@ export function Contact() {
     setIsSubmitting(true);
 
     try {
-      // If IP wasn't collected on focus (for some reason), try one more time
+      // If IP wasn't collected yet, try one more time
       if (!userIp) {
         await fetchUserIp();
       }
@@ -131,7 +128,6 @@ export function Contact() {
                 placeholder="Your Message"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                onFocus={handleMessageFocus}
                 required
                 className="min-h-[150px]"
               />
