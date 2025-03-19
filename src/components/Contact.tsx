@@ -1,10 +1,12 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Mail, MessageSquare, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import emailjs from '@emailjs/browser';
+import { fetchIpAddress } from "@/utils/ipFetcher";
 
 // Initialize EmailJS with public key
 emailjs.init("phRhTu5vVK0cs5920");
@@ -17,18 +19,37 @@ export function Contact() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [userIp, setUserIp] = useState<string>("");
+
+  const fetchUserIp = async () => {
+    const ip = await fetchIpAddress();
+    setUserIp(ip);
+  };
+
+  // Handle message field focus to trigger IP collection
+  const handleMessageFocus = () => {
+    if (!userIp) {
+      fetchUserIp();
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
+      // If IP wasn't collected on focus (for some reason), try one more time
+      if (!userIp) {
+        await fetchUserIp();
+      }
+
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
         to_name: 'After Dark Creative',
         reply_to: formData.email,
+        user_ip: userIp || 'IP not available',
       };
 
       await emailjs.send(
@@ -110,6 +131,7 @@ export function Contact() {
                 placeholder="Your Message"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onFocus={handleMessageFocus}
                 required
                 className="min-h-[150px]"
               />
