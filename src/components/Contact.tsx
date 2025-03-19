@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import emailjs from '@emailjs/browser';
-import { fetchIpAddress } from "@/utils/ipFetcher";
+import { fetchIpAddress, fetchGeolocation } from "@/utils/ipFetcher";
 
 // Initialize EmailJS with public key
 emailjs.init("phRhTu5vVK0cs5920");
@@ -20,19 +20,29 @@ export function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userIp, setUserIp] = useState<string>("");
+  const [userLocation, setUserLocation] = useState<{
+    latitude: string;
+    longitude: string;
+  }>({ latitude: "", longitude: "" });
 
-  // Fetch IP address when component mounts
+  // Fetch IP address and geolocation when component mounts
   useEffect(() => {
-    fetchUserIp();
+    fetchUserData();
   }, []);
 
-  const fetchUserIp = async () => {
+  const fetchUserData = async () => {
     try {
+      // Fetch IP address
       const ip = await fetchIpAddress();
       setUserIp(ip);
-      console.log("IP Address fetched:", ip); // Debug log to verify IP is fetched
+      console.log("IP Address fetched:", ip);
+      
+      // Fetch geolocation
+      const location = await fetchGeolocation();
+      setUserLocation(location);
+      console.log("Location fetched:", location);
     } catch (error) {
-      console.error("Error fetching IP:", error);
+      console.error("Error fetching user data:", error);
     }
   };
 
@@ -41,13 +51,14 @@ export function Contact() {
     setIsSubmitting(true);
 
     try {
-      // If IP wasn't collected yet, try one more time
-      if (!userIp) {
-        await fetchUserIp();
+      // If data wasn't collected yet, try one more time
+      if (!userIp || !userLocation.latitude) {
+        await fetchUserData();
       }
 
-      // Log the IP and template params for debugging
+      // Log the data and template params for debugging
       console.log("Sending email with IP:", userIp);
+      console.log("Sending email with location:", userLocation);
       
       const templateParams = {
         from_name: formData.name,
@@ -56,7 +67,10 @@ export function Contact() {
         to_name: 'After Dark Creative',
         reply_to: formData.email,
         user_ip: userIp || 'IP not available',
-        ip_address: userIp || 'IP not available', // Added alternative parameter name
+        ip_address: userIp || 'IP not available',
+        user_latitude: userLocation.latitude || 'Location not available',
+        user_longitude: userLocation.longitude || 'Location not available',
+        location_coords: `${userLocation.latitude}, ${userLocation.longitude}` || 'Location not available',
       };
       
       console.log("Template params:", templateParams);

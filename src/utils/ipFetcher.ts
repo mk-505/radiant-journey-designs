@@ -13,3 +13,35 @@ export async function fetchIpAddress(): Promise<string> {
     return 'Unable to fetch IP address';
   }
 }
+
+/**
+ * Utility function to fetch the user's geolocation
+ * @returns Promise that resolves to an object containing latitude and longitude
+ */
+export async function fetchGeolocation(): Promise<{ latitude: string; longitude: string }> {
+  return new Promise((resolve) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve({
+            latitude: position.coords.latitude.toString(),
+            longitude: position.coords.longitude.toString()
+          });
+        },
+        () => {
+          // Error or user denied location permission
+          resolve({
+            latitude: 'Location access denied',
+            longitude: 'Location access denied'
+          });
+        }
+      );
+    } else {
+      // Geolocation not supported
+      resolve({
+        latitude: 'Geolocation not supported',
+        longitude: 'Geolocation not supported'
+      });
+    }
+  });
+}
