@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function BackgroundMusic() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio] = useState(new Audio("/Morning Caf Jazz.mp3"));
+  const [audio] = useState(new Audio("/Enchanted Waterfall.mp3"));
 
   useEffect(() => {
     audio.loop = true;
