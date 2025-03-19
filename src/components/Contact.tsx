@@ -27,24 +27,23 @@ export function Contact() {
 
   // Fetch IP address and geolocation when component mounts
   useEffect(() => {
-    fetchUserData();
+    // Immediately invoke the async function
+    (async () => {
+      try {
+        // Fetch IP address
+        const ip = await fetchIpAddress();
+        setUserIp(ip);
+        console.log("IP Address fetched:", ip);
+        
+        // Fetch geolocation
+        const location = await fetchGeolocation();
+        setUserLocation(location);
+        console.log("Geolocation fetched successfully:", location);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    })();
   }, []);
-
-  const fetchUserData = async () => {
-    try {
-      // Fetch IP address
-      const ip = await fetchIpAddress();
-      setUserIp(ip);
-      console.log("IP Address fetched:", ip);
-      
-      // Fetch geolocation
-      const location = await fetchGeolocation();
-      setUserLocation(location);
-      console.log("Location fetched:", location);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,10 +51,22 @@ export function Contact() {
 
     try {
       // If data wasn't collected yet, try one more time
-      if (!userIp || !userLocation.latitude) {
-        await fetchUserData();
+      if (!userIp || (!userLocation.latitude && !userLocation.longitude)) {
+        console.log("Attempting to fetch data again before sending...");
+        const ip = await fetchIpAddress();
+        setUserIp(ip);
+        
+        const location = await fetchGeolocation();
+        setUserLocation(location);
+        
+        console.log("Re-fetched data before sending:", { ip, location });
       }
 
+      // Prepare coordinates string
+      const coordsString = userLocation.latitude && userLocation.longitude ? 
+        `${userLocation.latitude}, ${userLocation.longitude}` : 
+        'Location not available';
+      
       // Log the data and template params for debugging
       console.log("Sending email with IP:", userIp);
       console.log("Sending email with location:", userLocation);
@@ -70,7 +81,7 @@ export function Contact() {
         ip_address: userIp || 'IP not available',
         user_latitude: userLocation.latitude || 'Location not available',
         user_longitude: userLocation.longitude || 'Location not available',
-        location_coords: `${userLocation.latitude}, ${userLocation.longitude}` || 'Location not available',
+        location_coords: coordsString,
       };
       
       console.log("Template params:", templateParams);
