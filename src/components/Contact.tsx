@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Mail, MessageSquare, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,8 +27,13 @@ export function Contact() {
   }, []);
 
   const fetchUserIp = async () => {
-    const ip = await fetchIpAddress();
-    setUserIp(ip);
+    try {
+      const ip = await fetchIpAddress();
+      setUserIp(ip);
+      console.log("IP Address fetched:", ip); // Debug log to verify IP is fetched
+    } catch (error) {
+      console.error("Error fetching IP:", error);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,6 +46,9 @@ export function Contact() {
         await fetchUserIp();
       }
 
+      // Log the IP and template params for debugging
+      console.log("Sending email with IP:", userIp);
+      
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
@@ -47,7 +56,10 @@ export function Contact() {
         to_name: 'After Dark Creative',
         reply_to: formData.email,
         user_ip: userIp || 'IP not available',
+        ip_address: userIp || 'IP not available', // Added alternative parameter name
       };
+      
+      console.log("Template params:", templateParams);
 
       await emailjs.send(
         'service_y22zw4i',
