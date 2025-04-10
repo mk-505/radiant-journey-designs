@@ -25,7 +25,7 @@ export function Hero() {
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
           <Globe />
-          <Butterfly />
+          <Butterfly count={5} />
         </div>
       </div>
     </section>
