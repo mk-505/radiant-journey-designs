@@ -1,8 +1,6 @@
-
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Globe } from "@/components/Globe";
-import { Butterfly } from "@/components/Butterfly";
 
 export function Hero() {
   return (
@@ -25,7 +23,6 @@ export function Hero() {
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
           <Globe />
-          <Butterfly count={5} />
         </div>
       </div>
     </section>
