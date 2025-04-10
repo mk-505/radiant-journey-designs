@@ -1,5 +1,6 @@
+
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Star, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
@@ -15,9 +16,11 @@ export function Navbar() {
   }, []);
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "#about", icon: <span className="mr-1">👋</span> },
+    { name: "Services", href: "#services", icon: <Palette className="h-4 w-4 mr-1" /> },
+    { name: "Portfolio", href: "#portfolio", icon: <span className="mr-1">🎨</span> },
+    { name: "Testimonials", href: "#testimonials", icon: <Star className="h-4 w-4 mr-1" /> },
+    { name: "Contact", href: "#contact", icon: <span className="mr-1">📱</span> },
   ];
 
   return (
@@ -33,14 +36,16 @@ export function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium hover:text-afterdark-400 transition-colors"
+                className="text-sm font-medium hover:text-afterdark-400 transition-colors flex items-center group"
               >
+                <span className="opacity-70 group-hover:opacity-100 transition-opacity">{item.icon}</span>
                 {item.name}
+                <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-afterdark-400 mt-0.5"></span>
               </a>
             ))}
           </div>
@@ -64,9 +69,10 @@ export function Navbar() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-sm font-medium hover:text-afterdark-400 transition-colors"
+                  className="text-sm font-medium hover:text-afterdark-400 transition-colors flex items-center"
                   onClick={() => setIsMenuOpen(false)}
                 >
+                  <span className="mr-2">{item.icon}</span>
                   {item.name}
                 </a>
               ))}
