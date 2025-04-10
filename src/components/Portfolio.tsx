@@ -18,14 +18,14 @@ export function Portfolio() {
       {
       title: "Luxe Wheels",
       description: "Luxury car dealership and rental services",
-      image: "/asl.png",
-      link: "https://asl-sign-sensei.vercel.app/",
+      image: "/wheel.png",
+      link: "https://luxe-wheels.vercel.app/",
     },
     {
       title: "Defense Attorney",
       description: "Portfolio made for local defense attorneys",
-      image: "/asl.png",
-      link: "https://asl-sign-sensei.vercel.app/",
+      image: "/attorney.png",
+      link: "https://defense-lawyer.vercel.app/",
     },
   ];
 
