@@ -5,13 +5,13 @@ export function About() {
   const founders = [
     {
       name: "Shaun Arulanandam",
-      portfolio: "https://shaun2005.netlify.app/",
+      portfolio: "https://shaun-ar.ca/",
       image: "/shauna.jpg",
       description: "A tech enthusiast and entrepreneur passionate about leveraging AI, software development, and creativity to solve complex problems."
     },
     {
       name: "Manroop Kalsi",
-      portfolio: "https://manroopkalsi.notion.site/",
+      portfolio: "https://manroopkalsi.vercel.app/",
       image: "/manroop.jpg",
       description: "Driven by a passion for technology, innovation, and creating impactful solutions that inspire positive change."
     },
