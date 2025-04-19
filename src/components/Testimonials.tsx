@@ -6,20 +6,20 @@ export function Testimonials() {
   const testimonials = [
     {
       quote: "AfterDark Creatives transformed our online presence completely. Their attention to detail and creative approach helped us stand out in a crowded market.",
-      author: "Sarah Johnson",
-      company: "Bloom Florals",
+      author: "Suneet",
+      company: "Defense Attorney",
       rating: 5,
     },
     {
       quote: "Working with this team was a breeze. They understood our vision immediately and delivered a website that exceeded our expectations.",
-      author: "Michael Chen",
+      author: "David",
       company: "ASL Learn",
       rating: 5,
     },
     {
       quote: "The custom animations they created for our site have received countless compliments from our customers. Truly top-notch work!",
-      author: "Jessica Williams",
-      company: "Stellar Digital",
+      author: "Mary",
+      company: "Bloom",
       rating: 4,
     },
   ];
