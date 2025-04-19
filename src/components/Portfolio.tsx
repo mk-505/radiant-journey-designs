@@ -4,6 +4,16 @@ import { ExternalLink } from "lucide-react";
 export function Portfolio() {
   const projects = [
     {
+      title: "Netflix - Personal Portfolio",
+      description: "Netflix-themed portfolio with cinematic design and smooth navigation",
+      image: "/netflix.png",
+      link: "https://manroopkalsi.vercel.app/",
+    },{
+      title: "Spotify - Personal Portfolio",
+      description: "Spotify-inspired portfolio with bold visuals, music playback, and fluid interactions",
+      image: "/spotify.png",
+      link: "https://shaun-ar.ca/",
+    },{
       title: "Bloom Website",
       description: "Modern flower shop website with elegant design and seamless user experience",
       image: "/flowershop.png",
