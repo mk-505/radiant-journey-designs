@@ -4,12 +4,6 @@ import { ExternalLink } from "lucide-react";
 export function Portfolio() {
   const projects = [
     {
-      title: "PolishMePretty",
-      description: "Modern and Personalized Website Designed for Nail Studio",
-      image: "/polishmepretty.png",
-      link: "https://polish-me-pretty.vercel.app/",
-    },
-    {
       title: "Netflix - Personal Portfolio",
       description: "Netflix-themed portfolio with cinematic design and smooth navigation",
       image: "/netflix1.png",
@@ -19,7 +13,13 @@ export function Portfolio() {
       description: "Spotify-inspired portfolio with bold visuals, music playback, and fluid interactions",
       image: "/spotify.png",
       link: "https://shaun-ar.ca/",
-    },{
+    }, {
+      title: "PolishMePretty",
+      description: "Modern and Personalized Website Designed for Nail Studio",
+      image: "/polishmepretty.png",
+      link: "https://polish-me-pretty.vercel.app/",
+    },
+    {
       title: "Bloom Website",
       description: "Modern flower shop website with elegant design and seamless user experience",
       image: "/flowershop.png",
@@ -32,7 +32,7 @@ export function Portfolio() {
       link: "https://asl-sign-sensei.vercel.app/",
     },
       {
-      title: "Luxe Wheels",
+      title: "Luxe Wheels - DESIGN IN PROGRESS",
       description: "Luxury car dealership and rental services",
       image: "/wheels.png",
       link: "https://luxe-wheels.vercel.app/",
