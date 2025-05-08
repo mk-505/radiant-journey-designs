@@ -17,7 +17,7 @@ export function Portfolio() {
       title: "PolishMePretty",
       description: "Modern and Personalized Website Designed for Nail Studio",
       image: "/polishmepretty.png",
-      link: "https://polish-me-pretty.vercel.app/",
+      link: "http://polishmepretty.it.com/",
     },
     {
       title: "Bloom Website",
