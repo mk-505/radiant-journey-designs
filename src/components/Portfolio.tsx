@@ -20,12 +20,6 @@ export function Portfolio() {
       link: "http://polishmepretty.it.com/",
     },
     {
-      title: "Bloom Website",
-      description: "Modern flower shop website with elegant design and seamless user experience",
-      image: "/flowershop.png",
-      link: "https://incandescent-hamster-862917.netlify.app/",
-    },
-    {
       title: "ASL Learn",
       description: "Interactive platform for learning American Sign Language",
       image: "/asl.png",
