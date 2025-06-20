@@ -20,6 +20,12 @@ export function Portfolio() {
       link: "http://polishmepretty.it.com/",
     },
     {
+      title: "Foxy Locks Hair Extensions",
+      description: "Luxury hair extensions website with elegant design and premium service booking",
+      image: "/lovable-uploads/5c20315d-7ec6-4dab-bb7c-4d71df73c50b.png",
+      link: "https://foxy-locks.vercel.app/",
+    },
+    {
       title: "ASL Learn",
       description: "Interactive platform for learning American Sign Language",
       image: "/asl.png",
